@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div id="sketch">
+      <canvas id="paint"></canvas>
+    </div>
+
+    <div id="settings">
+      Colours
+      <button class="painting" onclick="getColor('blue');">Blue</button>
+      <button class="painting" onclick="getColor('red');">Red</button>
+      <button onclick="getColor('green');">Green</button>
+      <button onclick="getColor('white');">White</button>
+      <button onclick="getColor('white');">Eraser</button>
+    </div>
+
+    <div id="settings">
+      Brush Size
+      <button onclick="getSize('2');">Small</button>
+      <button onclick="getSize('5');">Med</button>
+      <button onclick="getSize('10');">Large</button>
+      <button onclick="getSize('20');">X Large</button>
+    </div>
+
+    <div id="settings">
+      Clear Canvas
+      <button onclick="clearCanvas();">Clear</button>
+    </div>
+    
+
+    <div id="guess-area">
+      <input id="answer" type="text" class="text-line" />
+      <button onclick="checkAnswer()">Guess</button>
+      <p id="result">results</p>
+      <!-- <input type="submit"> -->
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io("http://localhost:8080");
+
+      socket.on("message-from-server", function(evt) {
+        document.body.appendChild(document.createTextNode(evt.greeting));
+
+        socket.emit("message-from-client", {
+          greeting: "Hello from Client"
+        });
+      });
+    </script>
+
+<script src="app.js"></script>
+  </body>
+</html>
